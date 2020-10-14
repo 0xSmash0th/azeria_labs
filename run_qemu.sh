@@ -55,6 +55,8 @@ if [ $1 = "setup" ]; then
 	
 	cd ~
 	error_check
+
+	echo "########################################################\n\tRUN THE FOLLOWING COMMANDS IN THE RASPBIAN TERMINAL:\n\tsudo service ssh start\n\tsudo update-rc.d ssh enable\n\nYou should now be able to ssh to your qemu raspbian with: ssh pi@127.0.0.1 -p 5022\nThe default password is raspberry\n\nSee: https://azeria-labs.com/emulate-raspberry-pi-with-qemu/ for Advanced setup and trouble-shooting\n\n"
 	
 	qemu-system-arm -kernel ~/qemu_vms/qemu-rpi-kernel/kernel-qemu-4.4.34-jessie -cpu arm1176 -m 256 -M versatilepb -serial stdio -append "root=/dev/sda2 rootfstype=ext4 rw" -hda ~/qemu_vms/${RASPBIAN}.img -redir tcp:5022::22 -no-reboot
 else
