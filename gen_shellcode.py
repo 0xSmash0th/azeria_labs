@@ -99,6 +99,6 @@ cmd = ["hexdump", "-v", "-e", "8/4 \" %02X\" \"\n\"", exploit]
 runCmd(cmd)
 
 #run it
-call( [gdb, app] )
+call( [gdb, "-q", app] )
 
 
