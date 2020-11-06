@@ -26,7 +26,7 @@ pcPivot = '\xdc\xf1\xff\xbe' #stack0
 
 # If we need overflow set it here
 # format is decimal in bytes
-overflowPadding = 78 # stack0
+overflowPadding = 76 # stack0
 
 
 
